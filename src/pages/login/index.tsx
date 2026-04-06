@@ -1,0 +1,154 @@
+import React, { useState } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import { Rocket, ShieldCheck, Mail, Lock, ArrowRight, Github, Chrome } from 'lucide-react';
+
+const Login: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/dashboard';
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    try {
+      await login({ email, password });
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.error('Login failed:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-white flex flex-col md:flex-row font-sans">
+      {/* Left Side: Branding/Visual */}
+      <div className="hidden md:flex md:w-1/2 bg-gray-900 p-16 flex-col justify-between relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-600 rounded-full blur-[150px] -mr-64 -mt-64 opacity-20" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-400 rounded-full blur-[150px] -ml-64 -mb-64 opacity-10" />
+        
+        <div className="relative z-10">
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="bg-brand-600 p-2 rounded-xl group-hover:rotate-6 transition-transform">
+              <Rocket className="w-8 h-8 text-white" />
+            </div>
+            <span className="font-black text-3xl text-white tracking-tighter tracking-[-0.04em]">nexus-app</span>
+          </Link>
+        </div>
+
+        <div className="relative z-10 max-w-lg">
+          <h2 className="text-5xl font-black text-white leading-[1.1] mb-8 tracking-tight">
+            The platform for <span className="text-brand-500">modern</span> engineering teams.
+          </h2>
+          <p className="text-gray-400 text-xl font-medium leading-relaxed">
+            Join thousands of developers building the next generation of web applications.
+          </p>
+        </div>
+
+        <div className="relative z-10 flex gap-8 grayscale opacity-50">
+           <div className="font-black text-xl text-white">Vercel</div>
+           <div className="font-black text-xl text-white">Stripe</div>
+           <div className="font-black text-xl text-white">Linear</div>
+        </div>
+      </div>
+
+      {/* Right Side: Login Form */}
+      <div className="flex-1 flex items-center justify-center p-8 md:p-16 bg-gray-50/30">
+        <div className="w-full max-w-md">
+          <div className="mb-12">
+            <h1 className="text-4xl font-black text-gray-900 mb-3 tracking-tight">Welcome Back</h1>
+            <p className="text-gray-500 font-medium">New here? <a href="#" className="text-brand-600 font-bold hover:underline">Create an account</a></p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">Email Address</label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-brand-600 transition-colors">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 bg-white border border-gray-100 rounded-[1.25rem] focus:ring-4 focus:ring-brand-50 focus:border-brand-600 outline-none transition-all duration-300 font-bold text-gray-900 shadow-sm"
+                  placeholder="name@example.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex justify-between items-center ml-1">
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Password</label>
+                <a href="#" className="text-xs font-black text-brand-600 hover:text-brand-700 transition-colors uppercase tracking-wider">Forgot?</a>
+              </div>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-brand-600 transition-colors">
+                  <Lock className="w-5 h-5" />
+                </div>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 bg-white border border-gray-100 rounded-[1.25rem] focus:ring-4 focus:ring-brand-50 focus:border-brand-600 outline-none transition-all duration-300 font-bold text-gray-900 shadow-sm"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-gray-900 text-white font-black py-5 rounded-[1.25rem] hover:bg-gray-800 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-gray-200 disabled:opacity-70 disabled:cursor-not-allowed group text-lg"
+            >
+              {isLoading ? (
+                <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <>
+                  Sign In to Workspace
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="mt-10 flex flex-col gap-4">
+            <div className="relative flex items-center justify-center">
+              <div className="flex-grow border-t border-gray-100"></div>
+              <span className="flex-shrink mx-4 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Or continue with</span>
+              <div className="flex-grow border-t border-gray-100"></div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <button className="flex items-center justify-center gap-3 py-4 bg-white border border-gray-100 rounded-2xl font-bold text-gray-700 hover:bg-gray-50 transition-all shadow-sm">
+                <Chrome className="w-5 h-5" />
+                Google
+              </button>
+              <button className="flex items-center justify-center gap-3 py-4 bg-white border border-gray-100 rounded-2xl font-bold text-gray-700 hover:bg-gray-50 transition-all shadow-sm">
+                <Github className="w-5 h-5" />
+                GitHub
+              </button>
+            </div>
+          </div>
+
+          <p className="mt-12 text-center text-xs font-bold text-gray-400 flex items-center justify-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-green-500" />
+            Enterprise-grade security by default
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

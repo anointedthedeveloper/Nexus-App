@@ -1,0 +1,209 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Rocket, Shield, Zap, Globe, Github, ArrowRight, Code2, Layers } from 'lucide-react';
+
+const Home: React.FC = () => {
+  const year = new Date().getFullYear();
+
+  return (
+    <div className="min-h-screen bg-white font-sans">
+
+      {/* Nav */}
+      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-2.5">
+            <div className="bg-brand-600 p-2 rounded-xl">
+              <Rocket className="w-5 h-5 text-white" />
+            </div>
+            <span className="font-bold text-xl text-gray-900 tracking-tight">nexus-app</span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#features" className="text-sm font-semibold text-gray-500 hover:text-brand-600 transition-colors">Features</a>
+            <a href="#stack" className="text-sm font-semibold text-gray-500 hover:text-brand-600 transition-colors">Stack</a>
+            <a href="#" className="text-sm font-semibold text-gray-500 hover:text-brand-600 transition-colors">Docs</a>
+            <a href="https://github.com/anointedthedeveloper/Developer-CLI-Tool" target="_blank" rel="noreferrer" className="text-sm font-semibold text-gray-500 hover:text-brand-600 transition-colors">Contribute</a>
+          </div>
+
+          <div className="flex items-center gap-3">
+            
+            <Link to="/login" className="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-brand-600 transition-colors">
+              Sign In
+            </Link>
+            <Link to="/dashboard" className="px-5 py-2.5 bg-brand-600 text-white text-sm font-bold rounded-xl hover:bg-brand-700 transition-all shadow-lg shadow-brand-100 active:scale-95">
+              Get Started
+            </Link>
+            
+          </div>
+        </div>
+      </nav>
+
+      <main>
+        {/* Hero */}
+        <section className="relative pt-40 pb-32 px-6 overflow-hidden">
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-100 rounded-full blur-3xl opacity-40" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-50 rounded-full blur-3xl opacity-60" />
+          </div>
+
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold mb-8">
+              <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse" />
+              v1.0.8 — Still in Production
+            </div>
+
+            <h1 className="text-6xl md:text-8xl font-black text-gray-900 tracking-tighter leading-[0.9] mb-8">
+              Build your <span className="text-brand-600">next big idea</span>{' '}
+              faster than ever.
+            </h1>
+
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+              The ultimate React boilerplate with enterprise-grade features pre-configured.
+              Zero setup, maximum performance.
+            </p>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              
+              <Link to="/dashboard" className="group inline-flex items-center gap-2 px-8 py-4 bg-brand-600 text-white font-bold rounded-2xl hover:bg-brand-700 transition-all shadow-2xl shadow-brand-200 active:scale-95">
+                Launch Dashboard
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              
+              <a href="https://github.com" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-bold rounded-2xl border-2 border-gray-100 hover:border-brand-100 hover:bg-gray-50 transition-all active:scale-95">
+                <Github className="w-4 h-4" />
+                Star on GitHub
+              </a>
+            </div>
+
+            <div className="mt-24 pt-12 border-t border-gray-100">
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">Trusted by modern engineering teams</p>
+              <div className="flex flex-wrap justify-center gap-10 opacity-30 grayscale">
+                {['Vercel', 'Stripe', 'Discord', 'Linear', 'Loom'].map((name) => (
+                  <span key={name} className="text-2xl font-black text-gray-900 tracking-tighter">{name}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section id="features" className="py-32 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-20">
+              <h2 className="text-5xl font-black text-gray-900 tracking-tighter mb-4">
+                Everything you need,<br />nothing you don't.
+              </h2>
+              <p className="text-gray-500 text-lg font-medium">Carefully selected toolstack for modern web development.</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { icon: <Zap className="w-7 h-7 text-brand-600" />, title: 'Lightning Fast', desc: 'Built on Vite for sub-second HMR and optimized production builds that score 100 on Lighthouse.' },
+                { icon: <Shield className="w-7 h-7 text-brand-600" />, title: 'Secure by Default', desc: 'Pre-configured authentication context with JWT support and protected route middleware.' },
+                { icon: <Globe className="w-7 h-7 text-brand-600" />, title: 'Ready to Scale', desc: 'Modular architecture that grows with your team, from simple prototypes to complex platforms.' },
+                { icon: <Layers className="w-7 h-7 text-brand-600" />, title: 'Modular Structure', desc: 'Industry-standard folder organization with components, hooks, services, and contexts.' },
+                { icon: <Code2 className="w-7 h-7 text-brand-600" />, title: 'TypeScript First', desc: 'Fully typed codebase with strict mode enabled. Catch bugs before they reach production.' },
+                { icon: <Rocket className="w-7 h-7 text-brand-600" />, title: 'Deploy Anywhere', desc: 'Optimized for Vercel, Netlify, and any static host. One command to ship to production.' },
+              ].map(({ icon, title, desc }) => (
+                <div key={title} className="group p-8 bg-white rounded-3xl border border-gray-100 hover:border-brand-100 hover:shadow-xl hover:shadow-brand-50 transition-all duration-300">
+                  <div className="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-100 transition-all duration-300">
+                    {icon}
+                  </div>
+                  <h3 className="text-xl font-black text-gray-900 mb-3 tracking-tight">{title}</h3>
+                  <p className="text-gray-500 font-medium leading-relaxed text-sm">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Stack */}
+        <section id="stack" className="py-32 px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-5xl font-black text-gray-900 tracking-tighter mb-4">The modern stack.</h2>
+            <p className="text-gray-500 text-lg font-medium mb-16">Every tool chosen for a reason.</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { name: 'React 18', color: 'bg-blue-50 text-blue-700 border-blue-100' },
+                { name: 'TypeScript', color: 'bg-sky-50 text-sky-700 border-sky-100' },
+                { name: 'Vite', color: 'bg-purple-50 text-purple-700 border-purple-100' },
+                { name: 'TailwindCSS', color: 'bg-teal-50 text-teal-700 border-teal-100' },
+                { name: 'React Router 6', color: 'bg-red-50 text-red-700 border-red-100' },
+                { name: 'Axios', color: 'bg-indigo-50 text-indigo-700 border-indigo-100' },
+                { name: 'ESLint', color: 'bg-violet-50 text-violet-700 border-violet-100' },
+                { name: 'Prettier', color: 'bg-pink-50 text-pink-700 border-pink-100' },
+              ].map(({ name, color }) => (
+                <div key={name} className={`px-4 py-3 rounded-2xl border font-bold text-sm ${color}`}>{name}</div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="px-6 pb-32">
+          <div className="max-w-5xl mx-auto bg-brand-600 rounded-[2.5rem] p-16 text-center relative overflow-hidden">
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-brand-500 rounded-full opacity-50" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-brand-700 rounded-full opacity-50" />
+            <div className="relative z-10">
+              <h2 className="text-5xl font-black text-white tracking-tighter mb-6">Ready to start building?</h2>
+              <p className="text-brand-100 text-lg font-medium mb-10 max-w-xl mx-auto">
+                Join thousands of developers shipping faster with <strong className="text-white">nexus-app</strong>.
+              </p>
+              
+              <Link to="/dashboard" className="inline-flex px-10 py-5 bg-white text-brand-600 font-black rounded-2xl hover:bg-gray-50 transition-all shadow-xl hover:-translate-y-0.5 active:scale-95">
+                Create Account Now
+              </Link>
+              
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-100 py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div className="col-span-2">
+              <div className="flex items-center gap-2.5 mb-4">
+                <div className="bg-brand-600 p-1.5 rounded-lg">
+                  <Rocket className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-bold text-lg text-gray-900">nexus-app</span>
+              </div>
+              <p className="text-gray-500 text-sm font-medium max-w-xs leading-relaxed">
+                Making high-quality software development accessible to everyone, everywhere.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-bold text-gray-900 mb-5 text-xs uppercase tracking-widest">Product</h4>
+              <ul className="space-y-3 text-sm font-semibold text-gray-500">
+                <li><a href="#features" className="hover:text-brand-600 transition-colors">Features</a></li>
+                <li><a href="#stack" className="hover:text-brand-600 transition-colors">Stack</a></li>
+                <li><a href="#" className="hover:text-brand-600 transition-colors">Docs</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-gray-900 mb-5 text-xs uppercase tracking-widest">Company</h4>
+              <ul className="space-y-3 text-sm font-semibold text-gray-500">
+                <li><a href="#" className="hover:text-brand-600 transition-colors">About</a></li>
+                <li><a href="https://github.com/anointedthedeveloper/Developer-CLI-Tool" target="_blank" rel="noreferrer" className="hover:text-brand-600 transition-colors">Contribute</a></li>
+                <li><a href="#" className="hover:text-brand-600 transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-brand-600 transition-colors">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400 text-sm font-semibold">
+              © {year} <span className="text-gray-600">nexus-app</span>. All rights reserved.
+            </p>
+            <a href="https://github.com" className="text-gray-400 hover:text-brand-600 transition-colors">
+              <Github className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Home;
